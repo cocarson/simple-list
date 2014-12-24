@@ -1,14 +1,25 @@
 <head>
-  <title>simple-list</title>
+  <title>Template-Level Subscriptions</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
+  <div class="posts">
+    {{> posts}}
+  </div>
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="posts">
+	{{#each posts}}
+    <div class="post">
+    	<h3>{{title}}</h3>
+        <p>{{body}}</p>
+    </div>
+    {{/each}}
+    {{#if isReady}}
+        {{#if hasMorePosts}}
+            <a class="load-more" href="#">Load More</a>
+        {{/if}}
+    {{else}}
+        <div class="loading">{{>spinner}}</div>
+    {{/if}}
 </template>
